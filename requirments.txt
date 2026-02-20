@@ -1,0 +1,23 @@
+# Backend
+fastapi==0.110.0
+uvicorn==0.27.1
+python-multipart==0.0.9
+pydantic==2.6.1
+python-dotenv==1.0.1
+requests==2.31.0
+
+# Frontend
+streamlit==1.32.2
+
+# LangChain ecosystem
+langchain==0.1.14
+langchain-core==0.1.43
+langchain-community==0.0.31
+langchain-openai==0.1.2
+
+# Vector database
+chromadb==0.4.24
+
+# OpenAI & tokenization
+openai==1.14.2
+tiktoken==0.6.0
