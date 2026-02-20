@@ -34,7 +34,7 @@ This ensures answers are based on uploaded enterprise documents instead of rando
 
 ## 2) Architecture
 
-### High-Level Architecture Diagram (Text)
+### High-Level Architecture Diagram
 
 ![Enterprise Architecture](App/images/SystemArchitecture.png)
 
@@ -152,7 +152,8 @@ SIMILARITY_MARGIN_VALUE = 0.7
 
 Change the CHROMA_DB_PATH, SIMILARITY_SEARCH_INDEX, SIMILARITY_MARGIN_VALUE accordingly for your requiremnets and to have a high data accuracy and integrity.
 
-If you don't have a OpenAI API key visit `LINKKKK`
+If you don't have an OpenAI API key, visit:  
+https://openai.com/api/
 
 ---
 
@@ -163,6 +164,10 @@ You are required to run **backend** and **frontend** in two terminals.
 ---
 
 ### Terminal 1: Start FastAPI Backend
+
+```bash
+uvicorn cd App
+```
 
 ```bash
 uvicorn backend:app --reload --port 8000
@@ -195,8 +200,51 @@ http://localhost:8501
 ---
 
 
-## 7) Application Test Cases
+## 7) Application Overview
 
+### Application Screenshots
+
+#### Uploading Documents User Interface
+
+![Upload Documents UI](App\images\Upload_Docs_UI.png)
+
+#### Data Querying User Interface
+
+![Query Data UI](App\images\Query_UI.png)
+
+#### Side Chat Pane UI
+
+![Chat UI](App\images\Chat_Pane_UI.png)
+
+### Application Test Cases - Usability
+
+#### Uploading Documents - Success Scenario
+
+![Upload Documents](App\images\Uploading_Docs.png)
+
+![Upload Documents Success](App\images\Uploading_Docs_Success.png)
+
+#### Uploading Documents - Failed Scenario
+
+![Upload Documents Failed](App\images\Uploading_Docs_Failed.png)
+
+#### Query Data - Query Related Data
+
+![Query Related Data](App\images\Query_Related.png)
+
+#### Query Data - Query Unrelated Data
+
+![Query Unrelated Data](App\images\Query_unrelated.png)
+
+### Application Test Cases - Consistency
+
+#### Query Data - Type 1 Question
+
+![Query Related Data](App\images\Query_Related.png)
+
+#### Query Data - Type 2 Question
+
+![Query Related Data](App\images\Query_Related_1.png)
 
 ## 8) Assumptions
 
@@ -215,31 +263,25 @@ This system is built based on these assumptions:
 
 This RAG implmentation and the integrated sysytem currently has the following limitations:
 
-### Local Vector DB only
+- Local Vector DB only
+  Data is stored in a local vector DB and needs to change when scailling this prototype to enterprise level. 
 
-Data is stored in a local vector DB and needs to change when scailling this prototype to enterprise level. 
+- No Document Deletion
+  Once a document is embedded into ChromaDB, there is no feature to delete it.
 
-### No Document Deletion
+- Duplicate Detection Based Only on File Name
+  Duplicate checking is done only by file name.
+  If the same file is uploaded with a different name, it will be stored again.
 
-Once a document is embedded into ChromaDB, there is no feature to delete it.
+- Chat History is Not Stored Permanently Across Multiple Sessions
+  Streamlit session state stores conversations per browser session.
+  If multiple users use it or if the same user refreshes the session, chat history will be reloaded.
 
-### Duplicate Detection Based Only on File Name
+- No Authentication or User Level Data Isolation
+  No authentocation mechanism is implemented in the system to authenticate users. 
 
-Duplicate checking is done only by file name.
-If the same file is uploaded with a different name, it will be stored again.
-
-### Chat History is Not Stored Permanently Across Multiple Sessions
-
-Streamlit session state stores conversations per browser session.
-If multiple users use it or if the same user refreshes the session, chat history will be reloaded.
-
-### No Authentication or User Level Data Isolation
-
-No authentocation mechanism is implemented in the system to authenticate users. 
-
-### No Conversation Memory Sent to LLM
-
-Each time when the LLM is queried with a question the process begins from start as no conversation memory is sent to the LLM. 
+- No Conversation Memory Sent to LLM
+  Each time when the LLM is queried with a question the process begins from start as no conversation memory is sent to the LLM. 
 
 ---
 
